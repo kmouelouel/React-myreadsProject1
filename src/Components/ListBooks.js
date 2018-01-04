@@ -15,6 +15,7 @@ class ListBooks extends Component {
         });
     }
     updateShelf = (book, shelf) => {
+        console.log('updateShelf from listBooks')
         if (book.shelf !== shelf) {
             BooksAPI.update(book, shelf).then(shelves => {
                 book.shelf = shelf;
@@ -33,9 +34,9 @@ class ListBooks extends Component {
                 </div>
                 <div className="list-books-content">
                     <div>
-                        <BookShelf books={this.state.books} bookshelfTitle="Currently Reading" updateShelf={this.updateShelf} shelf="currentlyReading"/>
-                        <BookShelf books={this.state.books} bookshelfTitle="Want to Read" updateShelf={this.updateShelf} shelf="wantToRead"/>
-                        <BookShelf books={this.state.books} bookshelfTitle="Read" updateShelf={this.updateShelf} shelf="read"/>
+                        <BookShelf books={this.state.books.filter(book => book.shelf === "currentlyReading")} bookshelfTitle="Currently Reading" updateShelf={this.updateShelf} shelf={"currentlyReading"}/>
+                        <BookShelf books={this.state.books.filter(book => book.shelf === "wantToRead")} bookshelfTitle="Want to Read" updateShelf={this.updateShelf} shelf={"wantToRead"}/>
+                        <BookShelf books={this.state.books.filter(book => book.shelf === "read")} bookshelfTitle="Read" updateShelf={this.updateShelf} shelf={"Read"}/>
 
                     </div>
                 </div>
